@@ -19,6 +19,7 @@ import { useState, useRef } from 'react';
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showVideoPopup, setShowVideoPopup] = useState(true);
 
   const faqs = [
     {
@@ -528,6 +529,30 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Video Popup */}
+      {showVideoPopup && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <button 
+              onClick={() => setShowVideoPopup(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 text-white rounded-full backdrop-blur-md transition-colors"
+              aria-label="Close video"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="aspect-video w-full">
+              <video 
+                src="/video.mp4" 
+                controls 
+                autoPlay 
+                playsInline
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
